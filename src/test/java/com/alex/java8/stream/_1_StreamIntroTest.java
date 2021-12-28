@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class StreamTest {
+public class _1_StreamIntroTest {
     private List<Transaction> transactions;
 
     @BeforeMethod

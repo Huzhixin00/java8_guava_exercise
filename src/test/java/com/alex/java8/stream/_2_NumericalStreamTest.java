@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class NumericalStreamTest {
+public class _2_NumericalStreamTest {
     private List<Dish> menu;
 
     @BeforeMethod
@@ -60,11 +60,30 @@ public class NumericalStreamTest {
         System.out.println(count);
     }
 
+    @Test
+    public void generatePythagoreanNumbers() {
+        int max = 100;
 
+        Stream<int[]> pythagoreanNumbers = IntStream.rangeClosed(1, max).boxed()
+                .flatMap(a -> IntStream.rangeClosed(a, max)
+                        .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
+                        .mapToObj(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)}));
 
+        pythagoreanNumbers
+                .forEach(t -> System.out.println(t[0] + "," + t[1] + "," + t[2]));
+    }
 
+    @Test
+    public void generatePythagoreanNumbers_1() {
+        int max = 100;
+        /*先生成三元组，再筛选，只需要算一次平方根,复杂度 n^2 -> n*/
+        Stream<double[]> pythagoreanNumbers = IntStream.rangeClosed(1, max).boxed()
+                .flatMap(a -> IntStream.rangeClosed(a, max)
+                        .mapToObj(b -> new double[]{a, b, Math.sqrt(a * a + b * b)}))
+                .filter(t -> t[2] % 1 == 0);
 
-
+        pythagoreanNumbers.limit(5).forEach(t -> System.out.println(t[0] + "," + t[1] + "," + t[2]));
+    }
 
 
 }
